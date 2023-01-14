@@ -2,7 +2,6 @@ import PushNotification from 'react-native-push-notification';
 class Notifications {
   constructor() {
     PushNotification.configure({
-      // (optional) Called when Token is generated (iOS and Android)
       onRegister: function (token) {
         // console.log('TOKEN:', token);
       },
@@ -12,7 +11,6 @@ class Notifications {
       },
       popInitialNotification: true,
       requestPermissions: true,
-      // IOS ONLY (optional): default: all - Permissions to register.
       permissions: {
         alert: true,
         badge: false,
@@ -22,8 +20,8 @@ class Notifications {
 
     PushNotification.createChannel(
       {
-        channelId: 'reminder', // (required)
-        channelName: 'tap on send Notification', // (required)
+        channelId: 'reminder',
+        channelName: 'tap on send Notification',
         channelDescription: 'hy, You have tap on send notification',
       },
       () => {},
@@ -34,12 +32,12 @@ class Notifications {
     });
   }
 
-  sendNotification(date: Date) {
-    PushNotification.localNotificationSchedule({
+  sendNotification() {
+    PushNotification.localNotification({
       channelId: 'reminder',
       title: '🔔 Notification',
       message: 'Hy, You have tap on send notification',
-      date: date,
+      // date: date,
     });
   }
 }

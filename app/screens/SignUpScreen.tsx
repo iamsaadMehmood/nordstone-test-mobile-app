@@ -1,20 +1,20 @@
+import {ScrollView, Text} from 'native-base';
 import React, {useState} from 'react';
-import AppHeader from '../components/AppHeader';
 import {SafeAreaView, StyleSheet} from 'react-native';
-import {ScrollView, Text, VStack} from 'native-base';
+import validator from 'validator';
+import AlreadyAccount from '../components/AlreadyAccountorRegister';
+import AppHeader from '../components/AppHeader';
+import AppLoader from '../components/AppLoader';
 import InputComponent from '../components/Input';
-import {heightToDp, responsiveFontSize, widthToDp} from '../helpers/responsive';
 import PasswordInput from '../components/PasswordInput';
 import PrimaryButton from '../components/PrimaryButton';
-import AlreadyAccount from '../components/AlreadyAccountorRegister';
-import AppLoader from '../components/AppLoader';
 import {messages} from '../helpers/messages';
+import {heightToDp, responsiveFontSize, widthToDp} from '../helpers/responsive';
 import {Screens} from '../helpers/screenConstant';
 import {navigate} from '../services/navigation.service';
+import {Colors} from '../utils/color';
 import {Fonts} from '../utils/fonts';
 import {notifyToast} from '../utils/toast';
-import {Colors} from '../utils/color';
-import validator from 'validator';
 const SignUpScreen = (props: any) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
