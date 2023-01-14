@@ -1,4 +1,4 @@
-import {HStack, View, VStack} from 'native-base';
+import {HStack, Text, View, VStack} from 'native-base';
 import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import AppHeader from '../components/AppHeader';
@@ -10,15 +10,38 @@ import {Fonts} from '../utils/fonts';
 import DownArrow from '../assets/svgs/DownArrow';
 import PrimaryButton from '../components/PrimaryButton';
 import UpArrow from '../assets/svgs/UpArrow';
+import AppLoader from '../components/AppLoader';
+import {calculate} from '../services/api.service';
+import {notifyToast} from '../utils/toast';
 
 const CalculatorScreen = () => {
-  const [firstNumber, setFirstNumber] = useState('');
-  const [secondNumber, setSecondNumber] = useState('');
+  const [firstNumber, setFirstNumber] = useState('0');
+  const [secondNumber, setSecondNumber] = useState('0');
   const [operation, setOperation] = useState('');
+  const [answer, setAnswer] = useState(0);
+  const [loader, setLoader] = useState(false);
+  const calculator = async () => {
+    if (firstNumber && secondNumber) {
+      if (operation) {
+        setLoader(true);
+        const a = await calculate(
+          parseInt(firstNumber),
+          parseInt(secondNumber),
+          operation.toLowerCase(),
+        );
+        if (a) setAnswer(a);
+        setLoader(false);
+      } else {
+        notifyToast('please select operation type');
+      }
+    } else {
+      notifyToast('Please enter both number to calculate');
+    }
+  };
   return (
     <SafeAreaView style={styles.fillScreen}>
       <AppHeader title={'Calculator'} />
-      <VStack mt={10}>
+      <VStack mt={10} mx={5}>
         <HStack justifyContent={'space-between'} width={widthToDp(90)}>
           <InputComponent
             value={firstNumber}
@@ -47,7 +70,7 @@ const CalculatorScreen = () => {
           data={['Multiply', 'Addition', 'Subtraction']}
           onSelect={setOperation}
           defaultValue={operation}
-          defaultButtonText={'Select Type'}
+          defaultButtonText={'Select Operation'}
           buttonTextAfterSelection={(selectedItem, index) => {
             return selectedItem;
           }}
@@ -68,13 +91,17 @@ const CalculatorScreen = () => {
           rowStyle={styles.dropdownRowStyle}
           rowTextStyle={styles.dropdownRowTxtStyle}
         />
+        <HStack mt={10} justifyContent={'center'} alignItems={'center'}>
+          <Text style={styles.answer}>= {answer}</Text>
+        </HStack>
         <PrimaryButton
           title={'Calculate'}
-          onPress={() => null}
-          marginTop={40}
+          onPress={() => calculator()}
+          marginTop={10}
           marginHorizontal={0}
         />
       </VStack>
+      {loader && <AppLoader />}
     </SafeAreaView>
   );
 };
@@ -82,7 +109,7 @@ const styles = StyleSheet.create({
   fillScreen: {
     width: widthToDp(100),
     height: heightToDp(90),
-    marginHorizontal: 20,
+    // marginHorizontal: 20,
   },
   dropdownBtnTxtStyle: {
     color: Colors.secondary,
@@ -113,6 +140,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 0.5,
     borderColor: Colors.placeHolderColor,
+  },
+  answer: {
+    fontWeight: '600',
+    fontSize: responsiveFontSize(28),
+    lineHeight: 25,
+    fontFamily: Fonts.Regular,
+    color: Colors.primary,
   },
 });
 export default CalculatorScreen;

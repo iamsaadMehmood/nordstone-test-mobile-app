@@ -64,23 +64,18 @@ const PhotoScreen = () => {
           mediaType: 'photo',
           includeBase64: true,
         });
-
-        const type = imageData.assets[0].type;
-        let fileName = imageData.assets[0].fileName;
-        let uri = imageData.assets[0].uri;
         setLoader(true);
-        // setImageUri(uri);
         const url = await uploadImage(
           imageData.assets[0].uri,
           imageData.assets[0].fileName,
         );
-        // setLoader(false);
-        //upload
+        if (url) {
+          addToFireStore(url);
+        }
+        setLoader(false);
         console.log(url);
-        return url;
       } catch (e) {
         console.log(e);
-        return '';
       }
     }
   };
@@ -139,23 +134,18 @@ const PhotoScreen = () => {
           mediaType: 'photo',
           includeBase64: true,
         });
-
-        const type = imageData.assets[0].type;
-        let fileName = imageData.assets[0].fileName;
-        let uri = imageData.assets[0].uri;
         setLoader(true);
         const url = await uploadImage(
           imageData.assets[0].uri,
           imageData.assets[0].fileName,
         );
-        // setLoader(false);
         console.log(url);
-        // setImageUri(uri);
-        //upload
-        return url;
+        if (url) {
+          addToFireStore(url);
+        }
+        setLoader(false);
       } catch (e) {
         console.log(e);
-        return '';
       }
     }
   };
@@ -202,11 +192,7 @@ const PhotoScreen = () => {
             mt={3}
             style={styles.modalBtn}
             onPress={async () => {
-              const url = await openGallery();
-              if (url) {
-                addToFireStore(url);
-              }
-              setLoader(false);
+              await openGallery();
             }}>
             <Text style={styles.modalBtnTxt}>Upload from galery</Text>
           </Pressable>
@@ -214,11 +200,7 @@ const PhotoScreen = () => {
             mb={3}
             style={styles.modalBtn}
             onPress={async () => {
-              const url = await openCamera();
-              if (url) {
-                addToFireStore(url);
-              }
-              setLoader(false);
+              await openCamera();
             }}>
             <Text style={styles.modalBtnTxt}>Take picture</Text>
           </Pressable>

@@ -17,6 +17,7 @@
     "@react-navigation/bottom-tabs": "^6.5.3",
     "@react-navigation/native": "^6.1.2",
     "@react-navigation/native-stack": "^6.9.8",
+    "apisauce": "^2.1.6",
     "lottie-react-native": "^5.1.4",
     "moment": "^2.29.4",
     "native-base": "^3.4.25",
