@@ -5,4 +5,6 @@ export const Colors = {
   danger: '#FF0000',
   messageInputBackground: '#EFEFF0',
   messagePlaceHolder: '#8C919C',
+  lineColor: '#E8ECF4',
+  msgBackground: '#3F8ED6',
 };

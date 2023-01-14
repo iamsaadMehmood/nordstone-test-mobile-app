@@ -11,4 +11,5 @@ export const messages = {
   cameraPermissionDeniedDescription:
     'You have denied the Camera Permission Please allow permission from setting to access the Camera.',
   galleryPermissionDenied: 'You have denied the access to the photos',
+  enterMessage: 'please enter text to send',
 };
