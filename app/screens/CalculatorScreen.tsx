@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   dropdownBtnTxtStyle: {
-    // marginTop: 10,
     color: Colors.secondary,
     textAlign: 'left',
     fontSize: responsiveFontSize(16),

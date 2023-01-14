@@ -18,6 +18,7 @@ import {useFocusEffect} from '@react-navigation/native';
 // import useState from 'react';
 import PrimaryButton from '../components/PrimaryButton';
 interface IData {
+  id: string;
   username: string;
   createdOn: string;
   photo: string;
@@ -39,7 +40,9 @@ const PhotoScreen = () => {
     const db = firebase.firestore();
     const collectionRef = db.collection('testPhotos');
     const unsubscribe = collectionRef.onSnapshot(snap => {
-      const firestoreData: IData[] = snap.docs.map(doc => doc.data() as IData);
+      const firestoreData: IData[] = snap.docs.map(doc => {
+        return {id: doc.id, ...(doc.data() as any)};
+      });
       setData(firestoreData.reverse());
     });
     return () => unsubscribe();
@@ -174,19 +177,12 @@ const PhotoScreen = () => {
         <FlatList
           height={heightToDp(73)}
           paddingBottom={20}
-          // inverted
           showsVerticalScrollIndicator={false}
-          keyExtractor={item => item.photo}
+          keyExtractor={item => item.id}
           data={data}
           renderItem={item => renderItem(item.item)}
         />
       </View>
-      {/* <Pressable
-        mx={5}
-        style={styles.btn}
-        onPress={() => setModalVisible(true)}>
-        <Text style={styles.btnTitle}>Add Photo</Text>
-      </Pressable> */}
       <PrimaryButton
         title={'Add Photo'}
         onPress={() => setModalVisible(true)}
