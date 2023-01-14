@@ -1,5 +1,7 @@
+import {Pressable, Text, View} from 'native-base';
 import React from 'react';
-import {View, SafeAreaView, Pressable, StyleSheet, Text} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
+import AppHeader from '../components/AppHeader';
 
 import {heightToDp, responsiveFontSize, widthToDp} from '../helpers/responsive';
 import Notification from '../services/notificaton.service';
@@ -10,10 +12,13 @@ const NotificationScreen = () => {
     Notification.sendNotification(new Date());
   };
   return (
-    <SafeAreaView style={styles.mainContainer}>
-      <Pressable style={styles.btn} onPress={() => sendNotification()}>
-        <Text style={styles.btnTitle}>Send Notification</Text>
-      </Pressable>
+    <SafeAreaView>
+      <AppHeader title="Notification" />
+      <View style={styles.mainContainer}>
+        <Pressable style={styles.btn} onPress={() => sendNotification()}>
+          <Text style={styles.btnTitle}>Send Notification</Text>
+        </Pressable>
+      </View>
     </SafeAreaView>
   );
 };
@@ -34,7 +39,7 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     width: widthToDp(100),
-    height: heightToDp(90),
+    height: heightToDp(80),
     justifyContent: 'center',
     alignItems: 'center',
   },
