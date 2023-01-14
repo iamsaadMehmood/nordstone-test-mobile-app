@@ -2,15 +2,16 @@ import React from 'react';
 import {View, SafeAreaView, Pressable, StyleSheet, Text} from 'react-native';
 
 import {heightToDp, responsiveFontSize, widthToDp} from '../helpers/responsive';
+import Notification from '../services/notificaton.service';
 import {Colors} from '../utils/color';
 import {Fonts} from '../utils/fonts';
 const NotificationScreen = () => {
-  const sendNotofication = () => {
-    
+  const sendNotification = () => {
+    Notification.sendNotification();
   };
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <Pressable style={styles.btn} onPress={() => sendNotofication()}>
+      <Pressable style={styles.btn} onPress={() => sendNotification()}>
         <Text style={styles.btnTitle}>Send Notification</Text>
       </Pressable>
     </SafeAreaView>
