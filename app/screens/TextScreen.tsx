@@ -59,7 +59,7 @@ const TextScreen = () => {
     collectionRef.add({
       email: 'asad',
       message: message,
-      createdOn: new Date().toString(),
+      createdOn: new Date().toISOString(),
     });
   };
 

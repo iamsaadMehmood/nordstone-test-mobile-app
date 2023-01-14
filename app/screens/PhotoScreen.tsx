@@ -32,7 +32,7 @@ const PhotoScreen = () => {
     collectionRef.add({
       username: 'saad',
       photo: url,
-      createdOn: new Date().toString(),
+      createdOn: new Date().toISOString(),
     });
   };
   useEffect(() => {
@@ -42,8 +42,6 @@ const PhotoScreen = () => {
       const firestoreData: IData[] = snap.docs.map(doc => doc.data() as IData);
       setData(firestoreData.reverse());
     });
-
-    //remember to unsubscribe from your realtime listener on unmount or you will create a memory leak
     return () => unsubscribe();
   }, []);
 
