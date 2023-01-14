@@ -16,6 +16,7 @@ import {firebase} from '@react-native-firebase/firestore';
 import FastImage from 'react-native-fast-image';
 import {useFocusEffect} from '@react-navigation/native';
 // import useState from 'react';
+import PrimaryButton from '../components/PrimaryButton';
 interface IData {
   username: string;
   createdOn: string;
@@ -45,7 +46,6 @@ const PhotoScreen = () => {
     //remember to unsubscribe from your realtime listener on unmount or you will create a memory leak
     return () => unsubscribe();
   }, []);
- 
 
   const openCamera = async () => {
     setModalVisible(false);
@@ -183,12 +183,18 @@ const PhotoScreen = () => {
           renderItem={item => renderItem(item.item)}
         />
       </View>
-      <Pressable
+      {/* <Pressable
         mx={5}
         style={styles.btn}
         onPress={() => setModalVisible(true)}>
         <Text style={styles.btnTitle}>Add Photo</Text>
-      </Pressable>
+      </Pressable> */}
+      <PrimaryButton
+        title={'Add Photo'}
+        onPress={() => setModalVisible(true)}
+        marginTop={0}
+        marginHorizontal={5}
+      />
       <Modal
         isOpen={modalVisible}
         onClose={() => setModalVisible(false)}

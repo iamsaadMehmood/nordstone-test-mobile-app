@@ -17,7 +17,8 @@ import {Fonts} from '../utils/fonts';
 import {notifyToast} from '../utils/toast';
 import {messages} from '../helpers/messages';
 interface IData {
-  username: string;
+  id: string;
+  email: string;
   message: string;
   createdOn: string;
 }
@@ -56,22 +57,24 @@ const TextScreen = () => {
     const db = firebase.firestore();
     const collectionRef = db.collection('textMsg');
     collectionRef.add({
-      username: 'saad',
+      email: 'asad',
       message: message,
       createdOn: new Date().toString(),
     });
   };
 
   useEffect(() => {
-    const db = firebase.firestore();
-    const collectionRef = db.collection('textMsg');
-    const unsubscribe = collectionRef
-      .where('username', '==', 'saad')
+    const unsubscribe = firebase
+      .firestore()
+      .collection('textMsg')
+      .orderBy('createdOn', 'asc')
       .onSnapshot(snap => {
-        const firestoreData: IData[] = snap.docs.map(
-          doc => doc.data() as IData,
-        );
-        setData(firestoreData);
+        if (snap) {
+          const firestoreData: IData[] = snap.docs.map(doc => {
+            return {id: doc.id, ...(doc.data() as any)};
+          });
+          setData(firestoreData);
+        }
       });
     return () => unsubscribe();
   }, []);
@@ -94,7 +97,7 @@ const TextScreen = () => {
         paddingBottom={20}
         showsVerticalScrollIndicator={false}
         inverted
-        keyExtractor={item => item.createdOn}
+        keyExtractor={item => item.id}
         data={[...data].reverse()}
         renderItem={item => renderItem(item.item)}
       />
