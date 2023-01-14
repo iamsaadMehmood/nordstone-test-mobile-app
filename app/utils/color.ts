@@ -7,4 +7,6 @@ export const Colors = {
   messagePlaceHolder: '#8C919C',
   lineColor: '#E8ECF4',
   msgBackground: '#3F8ED6',
+  placeHolderColor: '#6B6B6B',
+  borderColor: '#1B1D21',
 };
