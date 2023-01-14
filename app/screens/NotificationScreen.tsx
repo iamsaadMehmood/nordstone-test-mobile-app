@@ -7,7 +7,7 @@ import {Colors} from '../utils/color';
 import {Fonts} from '../utils/fonts';
 const NotificationScreen = () => {
   const sendNotification = () => {
-    Notification.sendNotification();
+    Notification.sendNotification(new Date());
   };
   return (
     <SafeAreaView style={styles.mainContainer}>

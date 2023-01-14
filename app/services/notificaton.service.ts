@@ -22,9 +22,9 @@ class Notifications {
 
     PushNotification.createChannel(
       {
-        channelId: 'reminders', // (required)
-        channelName: 'Task reminder notifications', // (required)
-        channelDescription: 'Reminder for any tasks',
+        channelId: 'reminder', // (required)
+        channelName: 'tap on send Notification', // (required)
+        channelDescription: 'hy, You have tap on send notification',
       },
       () => {},
     );
@@ -34,12 +34,12 @@ class Notifications {
     });
   }
 
-  sendNotification() {
+  sendNotification(date: Date) {
     PushNotification.localNotificationSchedule({
-      channelId: 'reminders',
-      title: '🔔 Reminder!',
-      message: 'You have set this reminder',
-      date: new Date(),
+      channelId: 'reminder',
+      title: '🔔 Notification',
+      message: 'Hy, You have tap on send notification',
+      date: date,
     });
   }
 }
