@@ -39,7 +39,7 @@ const CalculatorScreen = () => {
     }
   };
   return (
-    <SafeAreaView style={styles.fillScreen}>
+    <SafeAreaView style={styles.fullScreen}>
       <AppHeader title={'Calculator'} />
       <VStack mt={10} mx={5}>
         <HStack justifyContent={'space-between'} width={widthToDp(90)}>
@@ -106,7 +106,7 @@ const CalculatorScreen = () => {
   );
 };
 const styles = StyleSheet.create({
-  fillScreen: {
+  fullScreen: {
     width: widthToDp(100),
     height: heightToDp(90),
     // marginHorizontal: 20,

@@ -13,6 +13,7 @@ interface InputProps {
   marginTop: number;
   editable?: boolean;
   keyboardType: KeyboardTypeOptions;
+  onC?: Function;
 }
 const InputComponent = (props: InputProps) => {
   return (
