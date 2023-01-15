@@ -80,7 +80,6 @@ const PhotoScreen = () => {
           await addToFireStore(url);
         }
         setLoader(false);
-        console.log(url);
       } catch (e) {
         console.log(e);
       }
@@ -107,7 +106,6 @@ const PhotoScreen = () => {
         isPermission = true;
       }
     }
-    console.log('Gallery', isPermission);
     if (isPermission) {
       return true;
     } else {
@@ -134,7 +132,6 @@ const PhotoScreen = () => {
   const openGallery = async () => {
     setModalVisible(false);
     const isPermissionGranted = await takeGalleryPermission();
-    console.log(isPermissionGranted);
     if (isPermissionGranted) {
       try {
         const imageData: any = await launchImageLibrary({
@@ -146,7 +143,6 @@ const PhotoScreen = () => {
           imageData.assets[0].uri,
           imageData.assets[0].fileName,
         );
-        console.log(url);
         if (url) {
           await addToFireStore(url);
         }

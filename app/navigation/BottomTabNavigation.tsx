@@ -1,21 +1,21 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import NotificationSelectedIcon from '../assets/svgs/NotificationSelectedIcon';
-import NotificationUnselectIcon from '../assets/svgs/NotificationUnselectIcon';
+import NotificationSelectedIcon from '../assets/svg/NotificationSelectedIcon';
+import NotificationUnselectIcon from '../assets/svg/NotificationUnselectIcon';
 import {heightToDp} from '../helpers/responsive';
 import {Screens} from '../helpers/screenConstant';
 import NotificationScreen from '../screens/NotificationScreen';
 import {Colors} from '../utils/color';
 import PhotoScreen from '../screens/PhotoScreen';
-import PhotoListingSelectedIcon from '../assets/svgs/PhotoListingSelectedIcon';
-import PhotoListingUnselectedIcon from '../assets/svgs/PhotoListingUnselectedIcon';
+import PhotoListingSelectedIcon from '../assets/svg/PhotoListingSelectedIcon';
+import PhotoListingUnselectedIcon from '../assets/svg/PhotoListingUnselectedIcon';
 import TextScreen from '../screens/TextScreen';
-import TextSelectedIcon from '../assets/svgs/TextSelectedIcon';
-import TextUnselectedIcon from '../assets/svgs/TextUnselectedIcon';
+import TextSelectedIcon from '../assets/svg/TextSelectedIcon';
+import TextUnselectedIcon from '../assets/svg/TextUnselectedIcon';
 import CalculatorScreen from '../screens/CalculatorScreen';
-import CalculatorSelectedIcon from '../assets/svgs/CalculatorSelectedIcon';
-import CalculatorUnselectedIcon from '../assets/svgs/CalculatorUnselectedIcon';
+import CalculatorSelectedIcon from '../assets/svg/CalculatorSelectedIcon';
+import CalculatorUnselectedIcon from '../assets/svg/CalculatorUnselectedIcon';
 
 const Tab = createBottomTabNavigator();
 const BottomTab = () => {

@@ -13,13 +13,11 @@ export const calculate = async (
   secondNumber: number,
   operation: string,
 ): Promise<number | undefined> => {
-  console.log(firstNumber, secondNumber, operation);
   const response = await api.post<number>('calculator', {
     firstNumber,
     secondNumber,
     operation,
   });
-  console.log(response.status);
   if (response.ok) {
     return response.data;
   } else {

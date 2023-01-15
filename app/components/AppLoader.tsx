@@ -1,7 +1,7 @@
-import {StyleSheet} from 'react-native';
 import AnimatedLottieView from 'lottie-react-native';
-import React from 'react';
 import {View} from 'native-base';
+import React from 'react';
+import {StyleSheet} from 'react-native';
 import {heightToDp, widthToDp} from '../helpers/responsive';
 
 const AppLoader = () => {

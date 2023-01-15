@@ -5,11 +5,12 @@ import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import validator from 'validator';
 import AlreadyAccount from '../components/AlreadyAccountorRegister';
-import AppHeader from '../components/AppHeader';
 import AppLoader from '../components/AppLoader';
+import AuthAppHeader from '../components/AuthAppHeader';
 import InputComponent from '../components/Input';
 import PasswordInput from '../components/PasswordInput';
 import PrimaryButton from '../components/PrimaryButton';
+import ValidationError from '../components/ValidateionError';
 import {messages} from '../helpers/messages';
 import {heightToDp, responsiveFontSize, widthToDp} from '../helpers/responsive';
 import {Screens} from '../helpers/screenConstant';
@@ -26,14 +27,9 @@ const SignUpScreen = (props: any) => {
   const [loading, setLoading] = useState(false);
   const [emailRes, setEmailRes] = useState('');
   const [passwordRes, setPasswordRes] = useState('');
-  const onSignUp = async () => {
-    if (
-      email &&
-      password &&
-      password === rePassword &&
-      !emailRes &&
-      !passwordRes
-    ) {
+
+  const onSignUp = async (e: string, p: string, rp: string) => {
+    if (e && p && p === rp && !emailRes && !passwordRes) {
       setLoading(true);
       try {
         const {user} = await auth().createUserWithEmailAndPassword(
@@ -44,13 +40,11 @@ const SignUpScreen = (props: any) => {
         props.navigation.dispatch(StackActions.replace(Screens.login));
         setLoading(false);
       } catch (error: any) {
-        console.log(error);
         setLoading(false);
         if (error.code === 'auth/email-already-in-use') {
           notifyToast(messages.userAlreadyExist);
         }
         if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
           notifyToast('Please enter valid email');
         }
       }
@@ -58,9 +52,16 @@ const SignUpScreen = (props: any) => {
       notifyToast(messages.requiredFieldsMissing);
     }
   };
+  const validatePassword = (text: string) => {
+    validator.isStrongPassword(text)
+      ? setPasswordRes('')
+      : setPasswordRes(
+          'Password must be at least 8 characters long\nPassword must contain at least one uppercase letter\nPassword must contain at least one lowercase letter\nPassword must contain at least one number\nPassword must contain at least one special character',
+        );
+  };
   return (
     <SafeAreaView style={styles.fullScreen}>
-      <AppHeader title={'Sign Up'} />
+      <AuthAppHeader title={'Sign Up'} marginBetween={25} />
       <ScrollView
         px={5}
         maxHeight={heightToDp(75)}
@@ -83,17 +84,12 @@ const SignUpScreen = (props: any) => {
           marginTop={5}
           keyboardType={'email-address'}
         />
-        {emailRes && <Text style={styles.error}>{emailRes}</Text>}
+        {emailRes && <ValidationError text={emailRes} />}
         <PasswordInput
           value={password}
           onChange={(text: string) => {
-            console.log(text);
             setPassword(text);
-            !validator.isStrongPassword(text)
-              ? setPasswordRes(
-                  'Password must be at least 8 characters long\nPassword must contain at least one uppercase letter\nPassword must contain at least one lowercase letter\nPassword must contain at least one number\nPassword must contain at least one special character',
-                )
-              : setPasswordRes('');
+            validatePassword(text);
           }}
           placeHolder={'Password'}
           width={widthToDp(90)}
@@ -108,11 +104,7 @@ const SignUpScreen = (props: any) => {
           value={rePassword}
           onChange={(text: string) => {
             setRePassword(text);
-            !validator.isStrongPassword(text)
-              ? setPasswordRes(
-                  'Password must be at least 8 characters long\nPassword must contain at least one uppercase letter\nPassword must contain at least one lowercase letter\nPassword must contain at least one number\nPassword must contain at least one special character\nBoth password should be same',
-                )
-              : setPasswordRes('');
+            validatePassword(text);
           }}
           placeHolder={'Confirm Password'}
           width={widthToDp(90)}
@@ -123,16 +115,11 @@ const SignUpScreen = (props: any) => {
           }}
           isSecure={secureRePassword}
         />
-        {passwordRes && <Text style={styles.error}>{passwordRes}</Text>}
+        {passwordRes && <ValidationError text={passwordRes} />}
         <PrimaryButton
           title={'Register'}
           onPress={async () => {
-            console.log(email);
-            if (email.trim() && password.trim()) {
-              await onSignUp();
-            } else {
-              notifyToast(messages.requiredFieldsMissing);
-            }
+            await onSignUp(email.trim(), password.trim(), rePassword.trim());
           }}
           marginTop={5}
           marginHorizontal={0}
@@ -166,13 +153,5 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     fontSize: responsiveFontSize(24),
     width: widthToDp(60),
-  },
-  error: {
-    color: Colors.danger,
-    fontFamily: Fonts.Regular,
-    fontSize: responsiveFontSize(14),
-    fontWeight: '500',
-    marginLeft: 5,
-    // marginTop: 3,
   },
 });

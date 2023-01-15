@@ -23,7 +23,6 @@ const WelcomeLoader = () => {
 const styles = StyleSheet.create({
   loader: {
     height: '100%',
-    
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',

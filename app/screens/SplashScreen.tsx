@@ -1,12 +1,11 @@
-import {View} from 'native-base';
-import {SafeAreaView, StyleSheet} from 'react-native';
-import {heightToDp, widthToDp} from '../helpers/responsive';
-import {Colors} from '../utils/color';
-import React, {useEffect} from 'react';
-import WelcomeLoader from '../components/WelcomeLoader';
-import {getEmail} from '../helpers/storage';
 import {StackActions} from '@react-navigation/native';
+import React, {useEffect} from 'react';
+import {SafeAreaView, StyleSheet} from 'react-native';
+import WelcomeLoader from '../components/WelcomeLoader';
+import {heightToDp, widthToDp} from '../helpers/responsive';
 import {Screens} from '../helpers/screenConstant';
+import {getEmail} from '../helpers/storage';
+import {Colors} from '../utils/color';
 
 const SplashScreen = (props: any) => {
   useEffect(() => {

@@ -9,7 +9,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import SendIcon from '../assets/svgs/SendIcon';
+import SendIcon from '../assets/svg/SendIcon';
 import AppHeader from '../components/AppHeader';
 import {heightToDp, responsiveFontSize, widthToDp} from '../helpers/responsive';
 import {Colors} from '../utils/color';
@@ -33,8 +33,6 @@ const TextScreen = () => {
   const [email, setEmail] = useState('');
   const keyboardDidShow = (e: any) => {
     const shortHeight = screenHeight - e.endCoordinates.height;
-
-    console.log(height, shortHeight);
     setHeight(shortHeight * 0.66);
   };
   useEffect(() => {

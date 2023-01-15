@@ -1,7 +1,7 @@
 import {Pressable, View} from 'native-base';
 import React from 'react';
 import {StyleSheet, TextInput} from 'react-native';
-import Eye from '../assets/svgs/Eye';
+import Eye from '../assets/svg/Eye';
 import {responsiveFontSize} from '../helpers/responsive';
 import {Colors} from '../utils/color';
 import {Fonts} from '../utils/fonts';
@@ -23,7 +23,7 @@ const PasswordInput = (props: InputProps) => {
       mt={props.marginTop}
       backgroundColor={Colors.background}
       width={props.width}
-    //   borderRadius={10}
+      //   borderRadius={10}
       style={styles.input}>
       <TextInput
         style={{

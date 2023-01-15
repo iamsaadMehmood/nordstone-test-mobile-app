@@ -1,6 +1,6 @@
 import {Pressable, Text} from 'native-base';
 import {StyleSheet} from 'react-native';
-import {heightToDp, responsiveFontSize, widthToDp} from '../helpers/responsive';
+import {responsiveFontSize, widthToDp} from '../helpers/responsive';
 import {Colors} from '../utils/color';
 import {Fonts} from '../utils/fonts';
 interface IProps {

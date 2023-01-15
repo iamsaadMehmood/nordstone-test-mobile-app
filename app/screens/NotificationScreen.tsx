@@ -2,9 +2,8 @@ import {Pressable, Text, View} from 'native-base';
 import React from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import AppHeader from '../components/AppHeader';
-
 import {heightToDp, responsiveFontSize, widthToDp} from '../helpers/responsive';
-import Notification from '../services/notificaton.service';
+import Notification from '../services/notification.service';
 import {Colors} from '../utils/color';
 import {Fonts} from '../utils/fonts';
 const NotificationScreen = () => {

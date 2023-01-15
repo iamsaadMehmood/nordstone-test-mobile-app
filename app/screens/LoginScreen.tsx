@@ -10,6 +10,7 @@ import AppLoader from '../components/AppLoader';
 import InputComponent from '../components/Input';
 import PasswordInput from '../components/PasswordInput';
 import PrimaryButton from '../components/PrimaryButton';
+import ValidationError from '../components/ValidateionError';
 import {messages} from '../helpers/messages';
 import {heightToDp, responsiveFontSize, widthToDp} from '../helpers/responsive';
 import {Screens} from '../helpers/screenConstant';
@@ -32,7 +33,6 @@ const LoginScreen = (props: any) => {
       try {
         setLoading(true);
         await auth().signInWithEmailAndPassword(e, p);
-        console.log('User signed in!');
         await storeEmail(e);
         setLoading(false);
         props.navigation.dispatch(StackActions.replace(Screens.bottomTab));
@@ -56,14 +56,12 @@ const LoginScreen = (props: any) => {
       setLoading(true);
       try {
         await auth().sendPasswordResetEmail(e);
-        // console.log(`Password reset email sent to ${e}`);
         notifyToast(`Password reset email sent to ${e}`);
         setLoading(false);
         setShowModal(false);
       } catch (error: any) {
         console.log(error);
         if (error.code === 'auth/user-not-found') {
-          // console.log(`No account found for email: ${e}`);
           notifyToast(`No account found for email: ${e}`);
         }
       }
@@ -150,13 +148,11 @@ const LoginScreen = (props: any) => {
               marginTop={5}
               keyboardType={'email-address'}
             />
-            {emailRes && <Text style={styles.error}>{emailRes}</Text>}
+            {emailRes && <ValidationError text={emailRes} />}
           </View>
           <PrimaryButton
             title={'Forget Password'}
             onPress={async () => {
-              // const e = ;
-
               await handleForgotPassword(fEmail.trim());
             }}
             marginTop={5}
@@ -226,12 +222,5 @@ const styles = StyleSheet.create({
     color: Colors.background,
     fontWeight: '400',
     fontFamily: Fonts.Regular,
-  },
-  error: {
-    color: Colors.danger,
-    fontFamily: Fonts.Regular,
-    fontSize: responsiveFontSize(14),
-    fontWeight: '500',
-    marginLeft: 5,
   },
 });
