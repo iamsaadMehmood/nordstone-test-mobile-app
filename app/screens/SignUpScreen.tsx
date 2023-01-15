@@ -1,6 +1,7 @@
+import auth from '@react-native-firebase/auth';
+import {StackActions} from '@react-navigation/native';
 import {ScrollView, Text} from 'native-base';
 import React, {useState} from 'react';
-import auth from '@react-native-firebase/auth';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import validator from 'validator';
 import AlreadyAccount from '../components/AlreadyAccountorRegister';
@@ -16,7 +17,6 @@ import {navigate} from '../services/navigation.service';
 import {Colors} from '../utils/color';
 import {Fonts} from '../utils/fonts';
 import {notifyToast} from '../utils/toast';
-import {StackActions} from '@react-navigation/native';
 const SignUpScreen = (props: any) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

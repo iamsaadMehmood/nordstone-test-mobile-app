@@ -1,7 +1,9 @@
+import auth from '@react-native-firebase/auth';
 import {StackActions} from '@react-navigation/native';
-import {Text, View, VStack} from 'native-base';
-import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {Modal, Text, View, VStack} from 'native-base';
+import React, {useState} from 'react';
+import {Keyboard, SafeAreaView, StyleSheet} from 'react-native';
+import validator from 'validator';
 import AlreadyAccount from '../components/AlreadyAccountorRegister';
 import AppHeader from '../components/AppHeader';
 import AppLoader from '../components/AppLoader';
@@ -11,21 +13,20 @@ import PrimaryButton from '../components/PrimaryButton';
 import {messages} from '../helpers/messages';
 import {heightToDp, responsiveFontSize, widthToDp} from '../helpers/responsive';
 import {Screens} from '../helpers/screenConstant';
+import {storeEmail} from '../helpers/storage';
 import {navigate} from '../services/navigation.service';
 import {Colors} from '../utils/color';
 import {Fonts} from '../utils/fonts';
 import {notifyToast} from '../utils/toast';
-import auth from '@react-native-firebase/auth';
-import {storeEmail} from '../helpers/storage';
 
 const LoginScreen = (props: any) => {
   const [email, setEmail] = useState('');
   const [fEmail, setFEmail] = useState('');
-  
+  const [showModal, setShowModal] = useState(false);
   const [password, setPassword] = useState('');
   const [securePassword, setSecurePassword] = useState(true);
   const [loading, setLoading] = useState(false);
-  //Welcome back! Glad to see you, Again!
+  const [emailRes, setEmailRes] = useState('');
   const handleLogin = async (e: string, p: string) => {
     if (e && p) {
       try {
@@ -49,19 +50,27 @@ const LoginScreen = (props: any) => {
     }
   };
 
-  async function handleForgotPassword(e: string) {
-    try {
-      await auth().sendPasswordResetEmail(e);
-      // console.log(`Password reset email sent to ${e}`);
-      notifyToast(`Password reset email sent to ${e}`);
-    } catch (error: any) {
-      console.log(error);
-      if (error.code === 'auth/user-not-found') {
-        // console.log(`No account found for email: ${e}`);
-        notifyToast(`No account found for email: ${e}`);
+  const handleForgotPassword = async (e: string) => {
+    if (e) {
+      Keyboard.dismiss();
+      setLoading(true);
+      try {
+        await auth().sendPasswordResetEmail(e);
+        // console.log(`Password reset email sent to ${e}`);
+        notifyToast(`Password reset email sent to ${e}`);
+        setLoading(false);
+        setShowModal(false);
+      } catch (error: any) {
+        console.log(error);
+        if (error.code === 'auth/user-not-found') {
+          // console.log(`No account found for email: ${e}`);
+          notifyToast(`No account found for email: ${e}`);
+        }
       }
+    } else {
+      notifyToast(messages.requiredFieldsMissing);
     }
-  }
+  };
   return (
     <SafeAreaView style={styles.fullScreen}>
       <AppHeader title={'Sign In'} />
@@ -94,7 +103,7 @@ const LoginScreen = (props: any) => {
         />
         <View style={styles.forgetPassword}>
           <Text
-            onPress={() => navigate(Screens.bottomTab)}
+            onPress={() => setShowModal(true)}
             style={styles.forgetPasswordText}>
             Forgot Password?
           </Text>
@@ -117,6 +126,45 @@ const LoginScreen = (props: any) => {
           onPress={() => navigate(Screens.signUp)}
         />
       </VStack>
+      <Modal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        avoidKeyboard
+        justifyContent="center"
+        bottom="4"
+        size="lg">
+        <Modal.Content style={styles.modalBodyContainer}>
+          <Text style={styles.forgetPasswordTitle}>Forget Password</Text>
+          <View>
+            <InputComponent
+              value={fEmail}
+              onChange={(text: string) => {
+                setFEmail(text);
+                validator.isEmail(text)
+                  ? setEmailRes('')
+                  : setEmailRes('Please enter valid email');
+              }}
+              placeHolder={'Enter your email'}
+              width={widthToDp(80)}
+              marginLeft={0}
+              marginTop={5}
+              keyboardType={'email-address'}
+            />
+            {emailRes && <Text style={styles.error}>{emailRes}</Text>}
+          </View>
+          <PrimaryButton
+            title={'Forget Password'}
+            onPress={async () => {
+              // const e = ;
+
+              await handleForgotPassword(fEmail.trim());
+            }}
+            marginTop={5}
+            marginHorizontal={0}
+            width={80}
+          />
+        </Modal.Content>
+      </Modal>
       {loading && <AppLoader />}
     </SafeAreaView>
   );
@@ -150,5 +198,40 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: Fonts.Regular,
     color: Colors.borderColor,
+  },
+  modalBodyContainer: {
+    width: widthToDp(90),
+    height: heightToDp(40),
+    justifyContent: 'space-between',
+    // alignItems: 'center',
+    padding: 20,
+  },
+  forgetPasswordTitle: {
+    fontFamily: Fonts.Regular,
+    fontSize: responsiveFontSize(20),
+    fontWeight: '500',
+    textAlign: 'center',
+    color: Colors.primary,
+  },
+  btn: {
+    width: widthToDp(90),
+    height: 48,
+    backgroundColor: Colors.primary,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  btnTitle: {
+    fontSize: responsiveFontSize(16),
+    color: Colors.background,
+    fontWeight: '400',
+    fontFamily: Fonts.Regular,
+  },
+  error: {
+    color: Colors.danger,
+    fontFamily: Fonts.Regular,
+    fontSize: responsiveFontSize(14),
+    fontWeight: '500',
+    marginLeft: 5,
   },
 });

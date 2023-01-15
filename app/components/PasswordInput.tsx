@@ -23,7 +23,7 @@ const PasswordInput = (props: InputProps) => {
       mt={props.marginTop}
       backgroundColor={Colors.background}
       width={props.width}
-      borderRadius={10}
+    //   borderRadius={10}
       style={styles.input}>
       <TextInput
         style={{
@@ -77,5 +77,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderColor: Colors.borderColor,
     flexDirection: 'row',
+
+    borderRadius: 10,
   },
 });
