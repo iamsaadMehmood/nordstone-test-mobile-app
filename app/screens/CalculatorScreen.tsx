@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
     width: widthToDp(100),
     height: heightToDp(90),
     // marginHorizontal: 20,
+    backgroundColor: Colors.background,
   },
   dropdownBtnTxtStyle: {
     color: Colors.secondary,

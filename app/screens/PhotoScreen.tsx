@@ -260,18 +260,5 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(18),
     color: Colors.primary,
   },
-  btn: {
-    width: widthToDp(90),
-    height: 48,
-    backgroundColor: Colors.primary,
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  btnTitle: {
-    fontSize: responsiveFontSize(16),
-    color: Colors.background,
-    fontWeight: '400',
-    fontFamily: Fonts.Regular,
-  },
+
 });

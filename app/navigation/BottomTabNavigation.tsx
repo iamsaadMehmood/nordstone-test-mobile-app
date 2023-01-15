@@ -1,6 +1,6 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import NotificationSelectedIcon from '../assets/svg/NotificationSelectedIcon';
 import NotificationUnselectIcon from '../assets/svg/NotificationUnselectIcon';
 import {heightToDp} from '../helpers/responsive';
@@ -16,6 +16,8 @@ import TextUnselectedIcon from '../assets/svg/TextUnselectedIcon';
 import CalculatorScreen from '../screens/CalculatorScreen';
 import CalculatorSelectedIcon from '../assets/svg/CalculatorSelectedIcon';
 import CalculatorUnselectedIcon from '../assets/svg/CalculatorUnselectedIcon';
+import {Text, View} from 'native-base';
+import {Fonts} from '../utils/fonts';
 
 const Tab = createBottomTabNavigator();
 const BottomTab = () => {
@@ -42,12 +44,14 @@ const BottomTab = () => {
               <View>
                 {tabInfo.focused ? (
                   <View style={styles.iconView}>
-                    <NotificationSelectedIcon width={7} height={7} />
-                    <Text style={styles.textActive}>Notification</Text>
+                    <NotificationSelectedIcon width={6} height={6} />
+                    <Text mt={1} style={styles.textActive}>
+                      Notification
+                    </Text>
                   </View>
                 ) : (
                   <View style={styles.iconView}>
-                    <NotificationUnselectIcon width={7} height={7} />
+                    <NotificationUnselectIcon width={6} height={6} />
                     <Text style={styles.textInActive}>Notification</Text>
                   </View>
                 )}
@@ -65,13 +69,15 @@ const BottomTab = () => {
               <View>
                 {tabInfo.focused ? (
                   <View style={styles.iconView}>
-                    <PhotoListingSelectedIcon width={7} height={7} />
+                    <PhotoListingSelectedIcon width={6} height={6} />
 
-                    <Text style={styles.textActive}>Photos</Text>
+                    <Text mt={1} style={styles.textActive}>
+                      Photos
+                    </Text>
                   </View>
                 ) : (
                   <View style={styles.iconView}>
-                    <PhotoListingUnselectedIcon width={7} height={7} />
+                    <PhotoListingUnselectedIcon width={6} height={6} />
 
                     <Text style={styles.textInActive}>Photos</Text>
                   </View>
@@ -90,13 +96,15 @@ const BottomTab = () => {
               <View>
                 {tabInfo.focused ? (
                   <View style={styles.iconView}>
-                    <TextSelectedIcon width={7} height={7} />
+                    <TextSelectedIcon width={6} height={6} />
 
-                    <Text style={styles.textActive}>Text</Text>
+                    <Text mt={1} style={styles.textActive}>
+                      Text
+                    </Text>
                   </View>
                 ) : (
                   <View style={styles.iconView}>
-                    <TextUnselectedIcon width={7} height={7} />
+                    <TextUnselectedIcon width={6} height={6} />
                     <Text style={styles.textInActive}>Text</Text>
                   </View>
                 )}
@@ -114,13 +122,15 @@ const BottomTab = () => {
               <View>
                 {tabInfo.focused ? (
                   <View style={styles.iconView}>
-                    <CalculatorSelectedIcon width={7} height={7} />
+                    <CalculatorSelectedIcon width={6} height={6} />
 
-                    <Text style={styles.textActive}>Calculator</Text>
+                    <Text mt={1} style={styles.textActive}>
+                      Calculator
+                    </Text>
                   </View>
                 ) : (
                   <View style={styles.iconView}>
-                    <CalculatorUnselectedIcon width={7} height={7} />
+                    <CalculatorUnselectedIcon width={6} height={6} />
                     <Text style={styles.textInActive}>Calculator</Text>
                   </View>
                 )}
@@ -137,19 +147,20 @@ export default BottomTab;
 const styles = StyleSheet.create({
   textActive: {
     color: Colors.primary,
-    // fontFamily: Fonts.Regular,
+    fontFamily: Fonts.Regular,
     fontSize: 12,
     // marginTop: 3,
     fontWeight: '400',
   },
   textInActive: {
     color: Colors.secondary,
-    // fontFamily: Fonts.Regular,
+    fontFamily: Fonts.Regular,
     fontSize: 12,
     // marginTop: 3,
     fontWeight: '400',
   },
   iconView: {
+    marginTop: 2,
     justifyContent: 'center',
     alignItems: 'center',
   },

@@ -1,6 +1,7 @@
 export const Colors = {
-  primary: '#573695',
-  secondary: '#000000',
+  primary: '#39AB96', //'#573695',
+  secondary: '#000022',
+  appBarBackground: '#EEFBFB',
   background: '#FFFFFF',
   danger: '#FF0000',
   messageInputBackground: '#EFEFF0',

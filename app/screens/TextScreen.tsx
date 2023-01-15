@@ -121,13 +121,13 @@ const TextScreen = () => {
         <Input
           multiline={true}
           minHeight={50}
-          maxHeight={100}
+          maxHeight={70}
           width={widthToDp(70)}
           borderRadius={55}
           value={text}
           keyboardType={'default'}
           backgroundColor={Colors.messageInputBackground}
-          placeholder="Message"
+          placeholder="Enter text"
           placeholderTextColor={Colors.messagePlaceHolder}
           color={Colors.secondary}
           fontFamily={Fonts.Regular}
@@ -161,8 +161,8 @@ const styles = StyleSheet.create({
     width: widthToDp(65),
     paddingHorizontal: 10,
     paddingVertical: 10,
-    backgroundColor: Colors.msgBackground,
-    marginTop: 10,
+    backgroundColor: Colors.primary,
+    marginBottom: 10,
     borderRadius: 10,
   },
   message: {
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.Regular,
     color: Colors.background,
     fontSize: 12,
-    opacity: 0.7,
+    // opacity: ,
     textAlign: 'right',
   },
   inputContainer: {
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     height: 80,
     width: widthToDp(100),
-    backgroundColor: Colors.background,
+    backgroundColor: Colors.appBarBackground,
     alignItems: 'center',
     justifyContent: 'center',
   },

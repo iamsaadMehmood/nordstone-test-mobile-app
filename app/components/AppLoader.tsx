@@ -9,8 +9,8 @@ const AppLoader = () => {
     <View style={styles.loader}>
       <AnimatedLottieView
         style={{
-          height: heightToDp(15),
-          width: widthToDp(15),
+          height: heightToDp(17),
+          width: widthToDp(17),
         }}
         source={require('../assets/spinner.json')}
         autoPlay

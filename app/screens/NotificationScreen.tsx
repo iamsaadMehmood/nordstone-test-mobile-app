@@ -11,7 +11,7 @@ const NotificationScreen = () => {
     Notification.sendNotification();
   };
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.fullScreen}>
       <AppHeader title="Notification" />
       <View style={styles.mainContainer}>
         <Pressable style={styles.btn} onPress={() => sendNotification()}>
@@ -22,6 +22,11 @@ const NotificationScreen = () => {
   );
 };
 const styles = StyleSheet.create({
+  fullScreen: {
+    backgroundColor: Colors.background,
+    width: widthToDp(100),
+    height: heightToDp(100),
+  },
   btn: {
     width: widthToDp(80),
     height: 55,
