@@ -17,6 +17,7 @@ import {Fonts} from '../utils/fonts';
 import {notifyToast} from '../utils/toast';
 import {messages} from '../helpers/messages';
 import {getEmail} from '../helpers/storage';
+import AppLoader from '../components/AppLoader';
 interface IData {
   id: string;
   email: string;
@@ -26,7 +27,7 @@ interface IData {
 const TextScreen = () => {
   const [data, setData] = useState<IData[]>([]);
   const screenHeight = Dimensions.get('window').height;
-  const [height, setHeight] = useState(screenHeight * 0.7);
+  const [height, setHeight] = useState(screenHeight * 0.72);
   const [text, setText] = useState('');
   const [loader, setLoader] = useState(false);
   const [email, setEmail] = useState('');
@@ -34,7 +35,7 @@ const TextScreen = () => {
     const shortHeight = screenHeight - e.endCoordinates.height;
 
     console.log(height, shortHeight);
-    setHeight(shortHeight * 0.6);
+    setHeight(shortHeight * 0.66);
   };
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -44,7 +45,7 @@ const TextScreen = () => {
     const keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       () => {
-        setHeight(screenHeight * 0.7);
+        setHeight(screenHeight * 0.72);
         // or some other action
       },
     );
@@ -76,6 +77,7 @@ const TextScreen = () => {
   };
   useEffect(() => {
     let unsubscribe: any;
+    setLoader(true);
     getStoreEmail().then(e => {
       unsubscribe = firebase
         .firestore()
@@ -87,6 +89,7 @@ const TextScreen = () => {
               return {id: doc.id, ...(doc.data() as any)};
             });
             setData(firestoreData);
+            setLoader(false);
           }
         });
     });
@@ -151,6 +154,7 @@ const TextScreen = () => {
           </View>
         </Pressable>
       </HStack>
+      {loader && <AppLoader />}
     </SafeAreaView>
   );
 };

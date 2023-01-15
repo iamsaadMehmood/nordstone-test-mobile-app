@@ -4,15 +4,15 @@ import React from 'react';
 import {View} from 'native-base';
 import {heightToDp, widthToDp} from '../helpers/responsive';
 
-const AppLoader = () => {
+const WelcomeLoader = () => {
   return (
     <View style={styles.loader}>
       <AnimatedLottieView
         style={{
-          height: heightToDp(15),
-          width: widthToDp(15),
+          height: heightToDp(30),
+          width: widthToDp(30),
         }}
-        source={require('../assets/spinner.json')}
+        source={require('../assets/welcome.json')}
         autoPlay
         loop
       />
@@ -23,7 +23,7 @@ const AppLoader = () => {
 const styles = StyleSheet.create({
   loader: {
     height: '100%',
-    position: 'absolute',
+    
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AppLoader;
+export default WelcomeLoader;

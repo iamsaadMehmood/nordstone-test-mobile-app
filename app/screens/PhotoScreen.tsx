@@ -43,13 +43,15 @@ const PhotoScreen = () => {
     setLoader(true);
     const db = firebase.firestore();
     const collectionRef = db.collection('photos');
-    const unsubscribe = collectionRef.onSnapshot(snap => {
-      const firestoreData: IData[] = snap.docs.map(doc => {
-        return {id: doc.id, ...(doc.data() as any)};
+    const unsubscribe = collectionRef
+      .orderBy('createdOn', 'asc')
+      .onSnapshot(snap => {
+        const firestoreData: IData[] = snap.docs.map(doc => {
+          return {id: doc.id, ...(doc.data() as any)};
+        });
+        setData(firestoreData);
+        setLoader(false);
       });
-      setData(firestoreData);
-      setLoader(false);
-    });
     return () => unsubscribe();
   }, []);
 

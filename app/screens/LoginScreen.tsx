@@ -20,6 +20,8 @@ import {storeEmail} from '../helpers/storage';
 
 const LoginScreen = (props: any) => {
   const [email, setEmail] = useState('');
+  const [fEmail, setFEmail] = useState('');
+  
   const [password, setPassword] = useState('');
   const [securePassword, setSecurePassword] = useState(true);
   const [loading, setLoading] = useState(false);
