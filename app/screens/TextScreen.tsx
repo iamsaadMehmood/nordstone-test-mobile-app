@@ -16,6 +16,7 @@ import {Colors} from '../utils/color';
 import {Fonts} from '../utils/fonts';
 import {notifyToast} from '../utils/toast';
 import {messages} from '../helpers/messages';
+import {getEmail} from '../helpers/storage';
 interface IData {
   id: string;
   email: string;
@@ -28,6 +29,7 @@ const TextScreen = () => {
   const [height, setHeight] = useState(screenHeight * 0.7);
   const [text, setText] = useState('');
   const [loader, setLoader] = useState(false);
+  const [email, setEmail] = useState('');
   const keyboardDidShow = (e: any) => {
     const shortHeight = screenHeight - e.endCoordinates.height;
 
@@ -55,27 +57,40 @@ const TextScreen = () => {
 
   const addToFireStore = (message: string) => {
     const db = firebase.firestore();
-    const collectionRef = db.collection('textMsg');
+    const collectionRef = db.collection(email);
     collectionRef.add({
-      email: 'asad',
+      email: email,
       message: message,
       createdOn: new Date().toISOString(),
     });
   };
 
+  const getStoreEmail = async () => {
+    if (email) {
+      return email;
+    } else {
+      const e = await getEmail();
+      setEmail(e);
+      return e;
+    }
+  };
   useEffect(() => {
-    const unsubscribe = firebase
-      .firestore()
-      .collection('textMsg')
-      .orderBy('createdOn', 'asc')
-      .onSnapshot(snap => {
-        if (snap) {
-          const firestoreData: IData[] = snap.docs.map(doc => {
-            return {id: doc.id, ...(doc.data() as any)};
-          });
-          setData(firestoreData);
-        }
-      });
+    let unsubscribe: any;
+    getStoreEmail().then(e => {
+      unsubscribe = firebase
+        .firestore()
+        .collection(e)
+        .orderBy('createdOn', 'asc')
+        .onSnapshot(snap => {
+          if (snap) {
+            const firestoreData: IData[] = snap.docs.map(doc => {
+              return {id: doc.id, ...(doc.data() as any)};
+            });
+            setData(firestoreData);
+          }
+        });
+    });
+
     return () => unsubscribe();
   }, []);
   const renderItem = (item: IData) => {

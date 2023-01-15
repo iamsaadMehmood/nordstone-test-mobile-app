@@ -17,9 +17,10 @@ import FastImage from 'react-native-fast-image';
 import {useFocusEffect} from '@react-navigation/native';
 // import useState from 'react';
 import PrimaryButton from '../components/PrimaryButton';
+import {getEmail, storeEmail} from '../helpers/storage';
 interface IData {
   id: string;
-  username: string;
+  email: string;
   createdOn: string;
   photo: string;
 }
@@ -27,23 +28,27 @@ const PhotoScreen = () => {
   const [data, setData] = useState<IData[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [loader, setLoader] = useState(false);
-  const addToFireStore = (url: string) => {
+  // const [email, setEmail] = useState('');
+  const addToFireStore = async (url: string) => {
+    const email = await getEmail();
     const db = firebase.firestore();
-    const collectionRef = db.collection('testPhotos');
+    const collectionRef = db.collection('photos');
     collectionRef.add({
-      username: 'saad',
+      email: email,
       photo: url,
       createdOn: new Date().toISOString(),
     });
   };
   useEffect(() => {
+    setLoader(true);
     const db = firebase.firestore();
-    const collectionRef = db.collection('testPhotos');
+    const collectionRef = db.collection('photos');
     const unsubscribe = collectionRef.onSnapshot(snap => {
       const firestoreData: IData[] = snap.docs.map(doc => {
         return {id: doc.id, ...(doc.data() as any)};
       });
-      setData(firestoreData.reverse());
+      setData(firestoreData);
+      setLoader(false);
     });
     return () => unsubscribe();
   }, []);
@@ -70,7 +75,7 @@ const PhotoScreen = () => {
           imageData.assets[0].fileName,
         );
         if (url) {
-          addToFireStore(url);
+          await addToFireStore(url);
         }
         setLoader(false);
         console.log(url);
@@ -141,7 +146,7 @@ const PhotoScreen = () => {
         );
         console.log(url);
         if (url) {
-          addToFireStore(url);
+          await addToFireStore(url);
         }
         setLoader(false);
       } catch (e) {

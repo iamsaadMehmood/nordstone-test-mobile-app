@@ -1,5 +1,6 @@
 import {ScrollView, Text} from 'native-base';
 import React, {useState} from 'react';
+import auth from '@react-native-firebase/auth';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import validator from 'validator';
 import AlreadyAccount from '../components/AlreadyAccountorRegister';
@@ -15,6 +16,7 @@ import {navigate} from '../services/navigation.service';
 import {Colors} from '../utils/color';
 import {Fonts} from '../utils/fonts';
 import {notifyToast} from '../utils/toast';
+import {StackActions} from '@react-navigation/native';
 const SignUpScreen = (props: any) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,7 +26,38 @@ const SignUpScreen = (props: any) => {
   const [loading, setLoading] = useState(false);
   const [emailRes, setEmailRes] = useState('');
   const [passwordRes, setPasswordRes] = useState('');
-  const onSignUp = async () => {};
+  const onSignUp = async () => {
+    if (
+      email &&
+      password &&
+      password === rePassword &&
+      !emailRes &&
+      !passwordRes
+    ) {
+      setLoading(true);
+      try {
+        const {user} = await auth().createUserWithEmailAndPassword(
+          email,
+          password,
+        );
+        notifyToast(messages.success);
+        props.navigation.dispatch(StackActions.replace(Screens.login));
+        setLoading(false);
+      } catch (error: any) {
+        console.log(error);
+        setLoading(false);
+        if (error.code === 'auth/email-already-in-use') {
+          notifyToast(messages.userAlreadyExist);
+        }
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+          notifyToast('Please enter valid email');
+        }
+      }
+    } else {
+      notifyToast(messages.requiredFieldsMissing);
+    }
+  };
   return (
     <SafeAreaView style={styles.fullScreen}>
       <AppHeader title={'Sign Up'} />
@@ -71,7 +104,6 @@ const SignUpScreen = (props: any) => {
           }}
           isSecure={securePassword}
         />
-        {/* <Text style={styles.error}>{passwordRes}</Text> */}
         <PasswordInput
           value={rePassword}
           onChange={(text: string) => {
@@ -141,6 +173,6 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(14),
     fontWeight: '500',
     marginLeft: 5,
-    marginTop: 3,
+    // marginTop: 3,
   },
 });

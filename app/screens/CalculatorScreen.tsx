@@ -15,8 +15,8 @@ import {calculate} from '../services/api.service';
 import {notifyToast} from '../utils/toast';
 
 const CalculatorScreen = () => {
-  const [firstNumber, setFirstNumber] = useState('0');
-  const [secondNumber, setSecondNumber] = useState('0');
+  const [firstNumber, setFirstNumber] = useState('');
+  const [secondNumber, setSecondNumber] = useState('');
   const [operation, setOperation] = useState('');
   const [answer, setAnswer] = useState(0);
   const [loader, setLoader] = useState(false);

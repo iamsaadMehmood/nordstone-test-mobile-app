@@ -1,10 +1,10 @@
 export const messages = {
-  userAlreadyExist: 'Email is already exist',
+  userAlreadyExist: 'email is already registered',
   unexpectedError: 'Something went wrong please try again later',
   requiredFieldsMissing: 'Please enter all mandatory Fields',
   authSvc503: 'Authentication service failure',
   invalidCredentials: 'Invalid username / password',
-  success: 'Success',
+  success: 'email successfully registered',
   supportSuccess: 'Your Message has been sent successfully',
   userNotFound: 'email is not registered',
   permissionDenied: 'Permission Denied',

@@ -15,6 +15,8 @@ import {navigate} from '../services/navigation.service';
 import {Colors} from '../utils/color';
 import {Fonts} from '../utils/fonts';
 import {notifyToast} from '../utils/toast';
+import auth from '@react-native-firebase/auth';
+import {storeEmail} from '../helpers/storage';
 
 const LoginScreen = (props: any) => {
   const [email, setEmail] = useState('');
@@ -22,6 +24,42 @@ const LoginScreen = (props: any) => {
   const [securePassword, setSecurePassword] = useState(true);
   const [loading, setLoading] = useState(false);
   //Welcome back! Glad to see you, Again!
+  const handleLogin = async (e: string, p: string) => {
+    if (e && p) {
+      try {
+        setLoading(true);
+        await auth().signInWithEmailAndPassword(e, p);
+        console.log('User signed in!');
+        await storeEmail(e);
+        setLoading(false);
+        props.navigation.dispatch(StackActions.replace(Screens.bottomTab));
+      } catch (error: any) {
+        setLoading(false);
+        console.log(error);
+        if (error.code === 'auth/user-not-found') {
+          notifyToast('No account found for that email!');
+        } else if (error.code === 'auth/wrong-password') {
+          notifyToast('Wrong password!');
+        }
+      }
+    } else {
+      notifyToast(messages.requiredFieldsMissing);
+    }
+  };
+
+  async function handleForgotPassword(e: string) {
+    try {
+      await auth().sendPasswordResetEmail(e);
+      // console.log(`Password reset email sent to ${e}`);
+      notifyToast(`Password reset email sent to ${e}`);
+    } catch (error: any) {
+      console.log(error);
+      if (error.code === 'auth/user-not-found') {
+        // console.log(`No account found for email: ${e}`);
+        notifyToast(`No account found for email: ${e}`);
+      }
+    }
+  }
   return (
     <SafeAreaView style={styles.fullScreen}>
       <AppHeader title={'Sign In'} />
@@ -64,20 +102,7 @@ const LoginScreen = (props: any) => {
           onPress={async () => {
             const e = email.trim();
             const p = password.trim();
-            if (e && p) {
-              // console.log(x, x.password, p);
-              // if (x.email === e && x.password === p) {
-              // await storeEmail(e);
-              // await storeUsername(x.username);
-              props.navigation.dispatch(
-                StackActions.replace(Screens.bottomTab),
-              );
-              // } else {
-              //   notifyToast(messages.invalidCredentials);
-              // }
-            } else {
-              notifyToast(messages.requiredFieldsMissing);
-            }
+            await handleLogin(e, p);
           }}
           marginTop={5}
           marginHorizontal={0}
