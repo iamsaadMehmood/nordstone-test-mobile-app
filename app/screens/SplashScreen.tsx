@@ -20,7 +20,7 @@ const SplashScreen = (props: any) => {
     }, 1000);
   }, []);
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.fullScreen}>
       <WelcomeLoader />
     </SafeAreaView>
   );
@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
   fullScreen: {
     height: heightToDp(100),
     width: widthToDp(100),
-    backgroundColor: Colors.background,
+    backgroundColor: Colors.appBarBackground,
   },
 });

@@ -119,12 +119,11 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.Regular,
   },
   dropdownDropdownStyle: {
-    backgroundColor: Colors.background,
+    backgroundColor: Colors.appBarBackground,
     borderRadius: 10,
   },
   dropdownRowStyle: {
-    backgroundColor: Colors.background,
-    borderBottomColor: Colors.placeHolderColor,
+    backgroundColor: Colors.appBarBackground,
     height: 44,
   },
   dropdownRowTxtStyle: {
