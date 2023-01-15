@@ -119,11 +119,12 @@ const TextScreen = () => {
       />
       <HStack style={styles.inputContainer}>
         <Input
+          mb={3}
           multiline={true}
           minHeight={50}
           maxHeight={70}
           width={widthToDp(70)}
-          borderRadius={55}
+          borderRadius={15}
           value={text}
           keyboardType={'default'}
           backgroundColor={Colors.messageInputBackground}
@@ -139,6 +140,7 @@ const TextScreen = () => {
         />
         <Pressable
           ml={3}
+          mb={3}
           onPress={() => {
             if (text) {
               addToFireStore(text);
@@ -148,7 +150,7 @@ const TextScreen = () => {
             }
           }}>
           <View style={styles.sendBtn}>
-            <SendIcon width={4} height={4} />
+            <SendIcon width={5} height={5} />
           </View>
         </Pressable>
       </HStack>
