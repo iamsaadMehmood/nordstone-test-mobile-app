@@ -82,6 +82,7 @@ const PhotoScreen = () => {
         setLoader(false);
       } catch (e) {
         console.log(e);
+        setLoader(false);
       }
     }
   };
@@ -149,6 +150,7 @@ const PhotoScreen = () => {
         setLoader(false);
       } catch (e) {
         console.log(e);
+        setLoader(false);
       }
     }
   };
@@ -220,7 +222,7 @@ const styles = StyleSheet.create({
     padding: 20,
     height: heightToDp(40),
     width: widthToDp(90),
-    backgroundColor: Colors.background,
+    backgroundColor: Colors.appBarBackground,
     shadowColor: Colors.secondary,
     shadowOffset: {
       width: 0,
@@ -239,7 +241,7 @@ const styles = StyleSheet.create({
   fullScreen: {
     width: widthToDp(100),
     height: heightToDp(90),
-    backgroundColor: Colors.lineColor,
+    backgroundColor: Colors.background,
   },
   modalBodyContainer: {
     width: widthToDp(100),
@@ -260,5 +262,4 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(18),
     color: Colors.primary,
   },
-
 });

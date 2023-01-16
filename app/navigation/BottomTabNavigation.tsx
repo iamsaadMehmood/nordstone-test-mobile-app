@@ -30,7 +30,6 @@ const BottomTab = () => {
           height: heightToDp(9),
           backgroundColor: Colors.background,
           paddingBottom: 20,
-          // marginTop: Platform.OS === 'ios' ? 20 : 0,
         },
         tabBarShowLabel: false,
         tabBarHideOnKeyboard: true,
