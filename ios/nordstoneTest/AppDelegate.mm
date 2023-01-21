@@ -1,5 +1,5 @@
 #import "AppDelegate.h"
-
+#import <Firebase.h>
 #import <React/RCTBundleURLProvider.h>
 
 @implementation AppDelegate
@@ -7,6 +7,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   self.moduleName = @"nordstoneTest";
+  [FIRApp configure];
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 

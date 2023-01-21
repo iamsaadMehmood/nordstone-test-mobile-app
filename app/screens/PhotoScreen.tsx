@@ -18,6 +18,7 @@ import {useFocusEffect} from '@react-navigation/native';
 // import useState from 'react';
 import PrimaryButton from '../components/PrimaryButton';
 import {getEmail, storeEmail} from '../helpers/storage';
+import Layout from '../components/Layout';
 interface IData {
   id: string;
   email: string;
@@ -166,7 +167,7 @@ const PhotoScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.fullScreen}>
+    <Layout>
       <AppHeader title="Photos" />
       <View mx={5}>
         <FlatList
@@ -212,7 +213,7 @@ const PhotoScreen = () => {
         </Modal.Content>
       </Modal>
       {loader && <AppLoader />}
-    </SafeAreaView>
+    </Layout>
   );
 };
 export default PhotoScreen;
@@ -237,11 +238,6 @@ const styles = StyleSheet.create({
     height: heightToDp(35),
     width: widthToDp(80),
     borderRadius: 10,
-  },
-  fullScreen: {
-    width: widthToDp(100),
-    height: heightToDp(90),
-    backgroundColor: Colors.background,
   },
   modalBodyContainer: {
     width: widthToDp(100),

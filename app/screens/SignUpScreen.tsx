@@ -2,12 +2,13 @@ import auth from '@react-native-firebase/auth';
 import {StackActions} from '@react-navigation/native';
 import {ScrollView, Text} from 'native-base';
 import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import validator from 'validator';
 import AlreadyAccount from '../components/AlreadyAccountorRegister';
 import AppLoader from '../components/AppLoader';
 import AuthAppHeader from '../components/AuthAppHeader';
 import InputComponent from '../components/Input';
+import Layout from '../components/Layout';
 import PasswordInput from '../components/PasswordInput';
 import PrimaryButton from '../components/PrimaryButton';
 import ValidationError from '../components/ValidateionError';
@@ -60,7 +61,7 @@ const SignUpScreen = (props: any) => {
         );
   };
   return (
-    <SafeAreaView style={styles.fullScreen}>
+    <Layout>
       <AuthAppHeader title={'Sign Up'} marginBetween={25} />
       <ScrollView
         px={5}
@@ -69,7 +70,6 @@ const SignUpScreen = (props: any) => {
         <Text style={styles.registerText}>
           Hello! Register now and get started.
         </Text>
-
         <InputComponent
           value={email}
           onChange={(text: string) => {
@@ -124,7 +124,6 @@ const SignUpScreen = (props: any) => {
           marginTop={5}
           marginHorizontal={0}
         />
-
         <AlreadyAccount
           text={'Already have an account? '}
           buttonText={'Login Now'}
@@ -134,17 +133,12 @@ const SignUpScreen = (props: any) => {
       </ScrollView>
 
       {loading && <AppLoader />}
-    </SafeAreaView>
+    </Layout>
   );
 };
 
 export default SignUpScreen;
 const styles = StyleSheet.create({
-  fullScreen: {
-    backgroundColor: Colors.background,
-    height: heightToDp(100),
-    width: widthToDp(100),
-  },
   registerText: {
     marginVertical: 20,
     paddingTop: 10,

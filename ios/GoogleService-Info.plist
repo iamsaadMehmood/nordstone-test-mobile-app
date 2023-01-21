@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>750453477238-htpdhan3dmud45fv9tm3hh7itgdc58k7.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.750453477238-htpdhan3dmud45fv9tm3hh7itgdc58k7</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>750453477238-e6gg8d77if2i7qf4e34b91m4kcrsnj5e.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB6AzI1DZkeKanPY2OoGwI_CtsdlNlhWFg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>750453477238</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.nordstoneTest</string>
+	<key>PROJECT_ID</key>
+	<string>nordstonetest-5305b</string>
+	<key>STORAGE_BUCKET</key>
+	<string>nordstonetest-5305b.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:750453477238:ios:2d0efdf667e29ee23ab457</string>
+</dict>
+</plist>

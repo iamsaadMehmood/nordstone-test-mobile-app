@@ -8,6 +8,7 @@ import AlreadyAccount from '../components/AlreadyAccountorRegister';
 import AppHeader from '../components/AppHeader';
 import AppLoader from '../components/AppLoader';
 import InputComponent from '../components/Input';
+import Layout from '../components/Layout';
 import PasswordInput from '../components/PasswordInput';
 import PrimaryButton from '../components/PrimaryButton';
 import ValidationError from '../components/ValidateionError';
@@ -70,7 +71,7 @@ const LoginScreen = (props: any) => {
     }
   };
   return (
-    <SafeAreaView style={styles.fullScreen}>
+    <Layout>
       <AppHeader title={'Sign In'} />
       <VStack mx={5}>
         <Text style={styles.registerText}>Welcome!</Text>
@@ -162,18 +163,12 @@ const LoginScreen = (props: any) => {
         </Modal.Content>
       </Modal>
       {loading && <AppLoader />}
-    </SafeAreaView>
+    </Layout>
   );
 };
 
 export default LoginScreen;
 const styles = StyleSheet.create({
-  fullScreen: {
-    backgroundColor: Colors.background,
-    height: heightToDp(100),
-    width: widthToDp(100),
-  },
-
   registerText: {
     marginVertical: 20,
     paddingTop: 10,

@@ -13,11 +13,12 @@ import UpArrow from '../assets/svg/UpArrow';
 import AppLoader from '../components/AppLoader';
 import {calculate} from '../services/api.service';
 import {notifyToast} from '../utils/toast';
+import Layout from '../components/Layout';
 
 const CalculatorScreen = () => {
   const [firstNumber, setFirstNumber] = useState('');
   const [secondNumber, setSecondNumber] = useState('');
-  const [operation, setOperation] = useState('');
+  const [operation, setOperation] = useState('Addition');
   const [answer, setAnswer] = useState(0);
   const [loader, setLoader] = useState(false);
   const calculator = async () => {
@@ -39,7 +40,7 @@ const CalculatorScreen = () => {
     }
   };
   return (
-    <SafeAreaView style={styles.fullScreen}>
+    <Layout>
       <AppHeader title={'Calculator'} />
       <VStack mt={10} mx={5}>
         <HStack justifyContent={'space-between'} width={widthToDp(90)}>
@@ -102,16 +103,10 @@ const CalculatorScreen = () => {
         />
       </VStack>
       {loader && <AppLoader />}
-    </SafeAreaView>
+    </Layout>
   );
 };
 const styles = StyleSheet.create({
-  fullScreen: {
-    width: widthToDp(100),
-    height: heightToDp(90),
-    // marginHorizontal: 20,
-    backgroundColor: Colors.background,
-  },
   dropdownBtnTxtStyle: {
     color: Colors.secondary,
     textAlign: 'left',
