@@ -1,19 +1,19 @@
-import {HStack, Text, View, VStack} from 'native-base';
+import {HStack, Text, VStack} from 'native-base';
 import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
-import AppHeader from '../components/AppHeader';
-import InputComponent from '../components/Input';
-import {heightToDp, responsiveFontSize, widthToDp} from '../helpers/responsive';
+import {StyleSheet} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
+import DownArrow from '../assets/svg/DownArrow';
+import UpArrow from '../assets/svg/UpArrow';
+import AppHeader from '../components/AppHeader';
+import AppLoader from '../components/AppLoader';
+import InputComponent from '../components/Input';
+import Layout from '../components/Layout';
+import PrimaryButton from '../components/PrimaryButton';
+import {responsiveFontSize, widthToDp} from '../helpers/responsive';
+import {calculate} from '../services/api.service';
 import {Colors} from '../utils/color';
 import {Fonts} from '../utils/fonts';
-import DownArrow from '../assets/svg/DownArrow';
-import PrimaryButton from '../components/PrimaryButton';
-import UpArrow from '../assets/svg/UpArrow';
-import AppLoader from '../components/AppLoader';
-import {calculate} from '../services/api.service';
 import {notifyToast} from '../utils/toast';
-import Layout from '../components/Layout';
 
 const CalculatorScreen = () => {
   const [firstNumber, setFirstNumber] = useState('');
