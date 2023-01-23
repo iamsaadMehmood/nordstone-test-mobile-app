@@ -47,7 +47,7 @@ const CalculatorScreen = () => {
           <InputComponent
             value={firstNumber}
             onChange={(text: string) => {
-              if (text !== ',' && text !== '.') setFirstNumber(text);
+              setFirstNumber(text);
             }}
             placeHolder={'First Number'}
             width={widthToDp(40)}
@@ -58,7 +58,7 @@ const CalculatorScreen = () => {
           <InputComponent
             value={secondNumber}
             onChange={(text: string) => {
-              if (text !== ',' && text !== '.') setSecondNumber(text);
+              setSecondNumber(text);
             }}
             placeHolder={'Second Number'}
             width={widthToDp(40)}
